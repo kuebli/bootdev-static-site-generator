@@ -15,9 +15,9 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         new_nodes = split_nodes_delimiter(old_nodes, "**", TextType.BOLD)
 
         expected = [
-            TextNode("this is regular, ", "text"),
-            TextNode("this is bold", "bold"),
-            TextNode(" but this is regular again.", "text"),
+            TextNode("this is regular, ", TextType.TEXT),
+            TextNode("this is bold", TextType.BOLD),
+            TextNode(" but this is regular again.", TextType.TEXT),
         ]
 
         self.assertEqual(new_nodes, expected)
@@ -30,8 +30,8 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         new_nodes = split_nodes_delimiter(old_nodes, "_", TextType.ITALIC)
 
         expected = [
-            TextNode("This is italic", "italic"),
-            TextNode(" and this is regular", "text"),
+            TextNode("This is italic", TextType.ITALIC),
+            TextNode(" and this is regular", TextType.TEXT),
         ]
 
         self.assertEqual(new_nodes, expected)
@@ -44,8 +44,8 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         new_nodes = split_nodes_delimiter(old_nodes, "`", TextType.CODE)
 
         expected = [
-            TextNode("This part is not code, ", "text"),
-            TextNode("but this one is", "code"),
+            TextNode("This part is not code, ", TextType.TEXT),
+            TextNode("but this one is", TextType.CODE),
         ]
 
         self.assertEqual(new_nodes, expected)
@@ -65,11 +65,11 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         new_nodes = split_nodes_delimiter(old_nodes, "**", TextType.BOLD)
 
         expected = [
-            TextNode("this is regular, ", "text"),
-            TextNode("this is bold", "bold"),
-            TextNode(" but this is regular again.", "text"),
-            TextNode("this is regular, ", "text"),
-            TextNode("this is bold", "bold"),
+            TextNode("this is regular, ", TextType.TEXT),
+            TextNode("this is bold", TextType.BOLD),
+            TextNode(" but this is regular again.", TextType.TEXT),
+            TextNode("this is regular, ", TextType.TEXT),
+            TextNode("this is bold", TextType.BOLD),
         ]
 
         self.assertEqual(new_nodes, expected)
