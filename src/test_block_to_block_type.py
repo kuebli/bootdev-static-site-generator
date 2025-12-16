@@ -29,6 +29,6 @@ class TestBlockToBlockType(unittest.TestCase):
         self.assertEqual(result, BlockType.UNORDERED_LIST)
 
     def test_ordered_list(self):
-        block = ". this is a ordered list block"
+        block = "1. this is a ordered list block"
         result = block_to_block_type(block)
         self.assertEqual(result, BlockType.ORDERED_LIST)

@@ -11,10 +11,11 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
         self.assertEqual(result.to_html(), expected)
 
     def test_one_line_heading_6(self):
-        text = "###### Heading 6 i hope"
-        expected = "<div><h6>Heading 6 i hope</h6></div>"
+        text = "###### Heading 6 i hope **and this is bold**"
+        expected = "<div><h6>Heading 6 i hope <b>and this is bold</b></h6></div>"
 
         result = markdown_to_html_node(text)
+        print(f"RESULT: {result.to_html()}")
         self.assertEqual(result.to_html(), expected)
 
     def test_one_line_code(self):
@@ -48,24 +49,25 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_one_line_ordered_list(self):
         text = """
-. ol item 1
-. ol item 2
-. ol item 3
+1. ol item 1
+2. ol item 2
+3. ol item 3
 """
         expected = (
             "<div><ol><li>ol item 1</li><li>ol item 2</li><li>ol item 3</li></ol></div>"
         )
 
         result = markdown_to_html_node(text)
+
         self.assertEqual(result.to_html(), expected)
 
     def test_multiple_lines(self):
         text = """
 ### Heading 3
 
-. ol item 1
-. ol item 2
-. ol item 3
+1. ol item 1
+2. ol item 2
+3. ol item 3
 """
         expected = "<div><h3>Heading 3</h3><ol><li>ol item 1</li><li>ol item 2</li><li>ol item 3</li></ol></div>"
 

@@ -20,6 +20,6 @@ def block_to_block_type(block: str):
         return BlockType.QUOTE
     elif block.startswith("-"):
         return BlockType.UNORDERED_LIST
-    elif block.startswith("."):
+    if re.match(r"^[1-6]\.\s.+$", block.replace("\n", "")):
         return BlockType.ORDERED_LIST
     return BlockType.PARAGRAPH

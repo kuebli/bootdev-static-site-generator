@@ -32,23 +32,21 @@ def markdown_to_html_node(document: str):
                     children_block.append(textnode_to_htmlnode(text_node))
                 children.append(ParentNode("blockquote", children_block))
             case BlockType.UNORDERED_LIST:
-                subblocks = block.split("\n")
-                subblocks_html_nodes = []
-                for block in subblocks:
-                    subblocks_html_nodes.append(
-                        ParentNode("li", [LeafNode("", block[2:])])
-                    )
-                children.append(ParentNode("ul", subblocks_html_nodes))
+                lis = []
+                for li in map(lambda t: t[2:], block.split("\n")):
+                    li_nodes = []
+                    for text_node in text_to_textnodes(li):
+                        li_nodes.append(textnode_to_htmlnode(text_node))
+                    lis.append(ParentNode("li", li_nodes))
+                children.append(ParentNode("ul", lis))
             case BlockType.ORDERED_LIST:
-                subblocks = block.split("\n")
-                subblocks_html_nodes = []
-                for block in subblocks:
-                    subblocks_html_nodes.append(
-                        ParentNode("li", [LeafNode("", block[2:])])
-                    )
-                children.append(ParentNode("ol", subblocks_html_nodes))
+                lis = []
+                for li in map(lambda t: t[3:], block.split("\n")):
+                    li_nodes = []
+                    for text_node in text_to_textnodes(li):
+                        li_nodes.append(textnode_to_htmlnode(text_node))
+                    lis.append(ParentNode("li", li_nodes))
+                children.append(ParentNode("ol", lis))
 
     parent_node = ParentNode("div", children)
-    # print(f"parent_node: {parent_node}")
-    # print(f"parent_node html: {parent_node.to_html()}")
     return parent_node
