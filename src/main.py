@@ -1,4 +1,6 @@
-from textnode import TextNode
+from copy_static_to_public import copy_static_to_public
+from os import path
 
-textnode = TextNode("test", "text type", "www.google.ch")
-print(textnode)
+static_path = path.abspath("") + "/static/"
+public_path = path.abspath("") + "/public/"
+copy_static_to_public(static_path, public_path)
